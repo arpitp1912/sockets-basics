@@ -11,4 +11,19 @@ socket.on('message', function(message){
 
 socket.emit('message', {
     text: "Welcome to chat application!"
+})
+
+//Handle submitting new message
+var $form = jQuery('#message-form');
+
+$form.on('submit', function(event){
+    event.preventDefault();
+
+    var $inputMessage = $form.find('input[name=message]');
+
+    socket.emit('message', {
+        text:$inputMessage.val()
     })
+
+    $inputMessage.val("");
+})
